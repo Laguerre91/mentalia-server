@@ -1,6 +1,5 @@
 const { Schema, model } = require("mongoose");
 
-// TODO: Please make sure you edit the User model to whatever makes sense in this case
 const userSchema = new Schema(
   {
     email: {
@@ -13,10 +12,40 @@ const userSchema = new Schema(
     password: {
       type: String,
       required: [true, 'Password is required.']
+    },
+    username: {
+      type: String,
+      required: [true, 'Username is required.'],
+    },
+    age: {
+      type: Number,
+    },
+    gender: {
+      type: String,
+      enum: ['Masculino', 'Femenino', 'No-binario', 'Prefiero no responder']
+    },
+    sexualOrientation: {
+      type: String,
+      enum: ['Heterosexual', 'Bisexual', 'Homosexual', 'Asexual', 'Otros', 'Prefiero no responder']
+    },
+    employed: {
+      type: Boolean,
+      default: false
+    },
+    sentimentalStatus: {
+      type: String,
+      enum: ['Soltero/a', 'Casado/a', 'En una relación', 'Viudo/a', 'Es complicado']
+    },
+    record: {
+      type: Schema.Types.ObjectId,
+      ref: 'Record'
+    },
+    appointments: {
+      type: Schema.Types.ObjectId,    //No sabemos si esto va aquí o no
+      ref: 'Appointment'
     }
   },
   {
-    // this second object adds extra properties: `createdAt` and `updatedAt`    
     timestamps: true
   }
 );
