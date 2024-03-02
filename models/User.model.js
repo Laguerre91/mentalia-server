@@ -1,21 +1,21 @@
-const { Schema, model } = require("mongoose");
+const { Schema, model } = require("mongoose")
 
 const userSchema = new Schema(
   {
     email: {
       type: String,
-      required: [true, 'Email is required.'],
+      required: [true, 'Email es necesario.'],
       unique: true,
       lowercase: true,
       trim: true
     },
     password: {
       type: String,
-      required: [true, 'Password is required.']
+      required: [true, 'Password es necesario.']
     },
     username: {
       type: String,
-      required: [true, 'Username is required.'],
+      required: [true, 'Username es necesario.'],
     },
     age: {
       type: Number,
@@ -48,8 +48,8 @@ const userSchema = new Schema(
   {
     timestamps: true
   }
-);
+)
 
-const User = model("User", userSchema);
+const User = model("User", userSchema)
 
-module.exports = User;
+module.exports = User
