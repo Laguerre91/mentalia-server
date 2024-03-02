@@ -29,6 +29,14 @@ Base URL /comunidad
 |      DELETE     | /post/:id    | Delete single post |
 
 
+PSIC ROUTES
+Base URL /psic
 
+| **HTTP Method** | **URI path** | **Description**          |
+|:---------------:|:------------:|--------------------------|
+|       GET       | /            | Get all psycologists     |
+|       GET       | /:id         | Get psycologist details  |
+|       PUT       | /:id         | Edit psycologist details |
+|      DELETE     | /:id         | Delete psycologist user  |
 
 
