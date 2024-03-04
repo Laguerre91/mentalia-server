@@ -40,10 +40,10 @@ const userSchema = new Schema(
       type: Schema.Types.ObjectId,
       ref: 'Record'
     }],
-    appointments: {
+    appointments: [{
       type: Schema.Types.ObjectId,    //No sabemos si esto va aquí o no
       ref: 'Appointment'
-    }
+    }]
   },
   {
     timestamps: true

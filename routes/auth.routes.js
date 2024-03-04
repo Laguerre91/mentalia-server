@@ -4,6 +4,7 @@ const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 
 const User = require("../models/User.model")
+
 const { isAuthenticated } = require("../middleware/jwt.middleware")
 
 const saltRounds = 10
@@ -34,8 +35,6 @@ router.post('/signup', (req, res, next) => {
     .findOne({ email })
     .then((foundUser) => {
 
-      console.log("hola hola")
-
       if (foundUser) {
         res.status(400).json({ message: "El usuario ya existe" })
         return
@@ -47,7 +46,6 @@ router.post('/signup', (req, res, next) => {
       return User.create({ email, username, password: hashedPassword })
     })
     .then(user => {
-      console.log("este es el otro then")
       res.status(201).json({ user })
     })
     .catch(err => next(err))
