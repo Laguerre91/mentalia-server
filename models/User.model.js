@@ -36,6 +36,10 @@ const userSchema = new Schema(
       type: String,
       enum: ['Soltero/a', 'Casado/a', 'En una relación', 'Viudo/a', 'Es complicado']
     },
+    hoursOfSleep: {
+      type: Number,
+      default: 0
+    },
     records: [{
       type: Schema.Types.ObjectId,
       ref: 'Record'

@@ -4,16 +4,21 @@ const mongoose = require("mongoose")
 
 const Post = require('./../models/Post.model')
 
+// TODO: REVISAR ENDPOINTS APTOS PARA SELECT Y SORT
+
 router.get('/', (req, res, next) => {
 
     Post
         .find()
+        // .select()
+        // .sort()
         .populate('user')
         .then(allPosts => res.json(allPosts))
         .catch(err => next(err))
 })
 
 router.put('/:postId', (req, res, next) => {
+
     const { postId } = req.params
 
     if (!mongoose.Types.ObjectId.isValid(postId)) {

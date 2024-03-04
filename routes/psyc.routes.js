@@ -40,6 +40,8 @@ router.post("/", (req, res, next) => {
 
 router.put("/:psycId", (req, res, next) => {
     const { psycId } = req.params
+    const { name, lastName, contact, password, birth, profileImage, yearsOfExperience, rate, appointments } = req.body
+
 
     if (!mongoose.Types.ObjectId.isValid(psycId)) {
         res.status(400).json({ message: "Specified id is not valid" })
@@ -47,7 +49,10 @@ router.put("/:psycId", (req, res, next) => {
     }
 
     Psyc
-        .findByIdAndUpdate(psycId, req.body, { new: true })
+        .findByIdAndUpdate(
+            psycId,
+            { name, lastName, contact, password, birth, profileImage, yearsOfExperience, rate, appointments },
+            { new: true, runValidators: true })
         .then(updatedPsic => res.json(updatedPsic))
         .catch(err => next(err))
 })
@@ -63,6 +68,7 @@ router.delete("/:psycId", (req, res, next) => {
     Psyc
         .findByIdAndDelete(psycId)
         .then(() => res.json({ message: `Psychologist with id ${psycId} has been deleted successfully` }))
+        .catch(err => next(err))
 })
 
 module.exports = router
