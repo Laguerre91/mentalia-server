@@ -8,14 +8,15 @@ Base URL /auth
 |       GET       | /verify      | Verify Auth token |
 
 
+
 USER ROUTES
-Base URL /usuario
+Base URL /usuarios
 
 | **HTTP Method** | **URI path** | **Description**   |
 |:---------------:|:------------:|-------------------|
-|       GET       | /:id         | Get user details  |
-|       PUT       | /:id         | Edit user details |
-|      DELETE     | /:id         | Delete user       |
+|       GET       | /:userid         | Get user details  |
+|       PUT       | /:userid         | Edit user details |
+|      DELETE     | /:userid         | Delete user       |
 
 
 COMMUNITY ROUTES
