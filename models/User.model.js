@@ -17,8 +17,8 @@ const userSchema = new Schema(
       type: String,
       required: [true, 'Username es necesario.'],
     },
-    age: {
-      type: Number,
+    birth: {
+      type: Date,
     },
     gender: {
       type: String,
@@ -36,10 +36,10 @@ const userSchema = new Schema(
       type: String,
       enum: ['Soltero/a', 'Casado/a', 'En una relación', 'Viudo/a', 'Es complicado']
     },
-    record: {
+    records: [{
       type: Schema.Types.ObjectId,
       ref: 'Record'
-    },
+    }],
     appointments: {
       type: Schema.Types.ObjectId,    //No sabemos si esto va aquí o no
       ref: 'Appointment'

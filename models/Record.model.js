@@ -5,7 +5,6 @@ const recordSchema = new Schema(
         date: {
             type: Date,
             required: true,
-            unique: true,
             default: Date.now
         },
         mood: {
@@ -39,6 +38,6 @@ const recordSchema = new Schema(
     }
 )
 
-const User = model("User", userSchema)
+const Record = model("Record", recordSchema)
 
-module.exports = User
+module.exports = Record

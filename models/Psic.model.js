@@ -14,12 +14,11 @@ const psicSchema = new Schema(
             email: {
                 type: String,
                 required: [true, 'Email is required.'],
-                unique: true,
                 lowercase: true,
                 trim: true
             },
             phoneNumber: {
-                type: Number,
+                type: String,
                 required: true
             }
         }],
@@ -27,8 +26,8 @@ const psicSchema = new Schema(
             type: String,
             required: [true, 'Password is required.']
         },
-        age: {
-            type: Number,
+        birth: {
+            type: Date
         },
         profileImage: {
             type: String,
