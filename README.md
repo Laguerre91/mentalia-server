@@ -38,6 +38,6 @@ Base URL /psic
 |       GET       | /            | Get all psycologists     |
 |       GET       | /:id         | Get psycologist details  |
 |       PUT       | /:id         | Edit psycologist details |
-|      DELETE     | /:id         | Delete psycologist user  |
+
 
 

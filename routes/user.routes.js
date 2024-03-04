@@ -30,6 +30,7 @@ router.put('/:userId', (req, res, next) => {
 
     User
         .findByIdAndUpdate(userId, req.body, { new: true })
+        .populate("records", "appointments")
         .then(updatedUser => res.json(updatedUser))
         .catch(err => next(err))
 

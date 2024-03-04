@@ -1,6 +1,6 @@
 const { Schema, model } = require("mongoose")
 
-const psicSchema = new Schema(
+const psycSchema = new Schema(
     {
         name: {
             type: String,
@@ -10,7 +10,7 @@ const psicSchema = new Schema(
             type: String,
             required: true
         },
-        contact: [{
+        contact: {
             email: {
                 type: String,
                 required: [true, 'Email is required.'],
@@ -21,7 +21,7 @@ const psicSchema = new Schema(
                 type: String,
                 required: true
             }
-        }],
+        },
         password: {
             type: String,
             required: [true, 'Password is required.']
@@ -50,6 +50,6 @@ const psicSchema = new Schema(
 }
 )
 
-const Psic = model("Psic", psicSchema)
+const Psyc = model("Psyc", psycSchema)
 
-module.exports = Psic
+module.exports = Psyc

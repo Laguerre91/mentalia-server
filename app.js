@@ -15,6 +15,9 @@ app.use("/api/usuarios", userRouter)
 const communityRouter = require("./routes/community.routes")
 app.use("/api/comunidad", communityRouter)
 
+const psycRouter = require("./routes/psyc.routes")
+app.use("/api/psic", psycRouter)
+
 const authRouter = require("./routes/auth.routes")
 app.use("/api", authRouter)
 

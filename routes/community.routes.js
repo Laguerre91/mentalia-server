@@ -16,7 +16,7 @@ router.get('/', (req, res, next) => {
 router.put('/:postId', (req, res, next) => {
     const { postId } = req.params
 
-    if (!mongoose.Types.ObjectId.isValid(userId)) {
+    if (!mongoose.Types.ObjectId.isValid(postId)) {
         res.status(400).json({ message: "Specified id is not valid" })
         return
     }
@@ -39,7 +39,7 @@ router.post('/postId', (req, res, next) => {
 router.delete('/postId', (req, res, next) => {
     const { postId } = req.params
 
-    if (!mongoose.Types.ObjectId.isValid(userId)) {
+    if (!mongoose.Types.ObjectId.isValid(postId)) {
         res.status(400).json({ message: "Specified id is not valid" })
         return
     }
