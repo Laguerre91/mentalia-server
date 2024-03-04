@@ -3,9 +3,7 @@ const router = express.Router()
 const mongoose = require("mongoose")
 
 const User = require('./../models/User.model')
-const Record = require('./../models/Record.model')
-const Appointment = require('./../models/Appointment.model')
-const Post = require('./../models/Post.model')
+
 
 router.get('/:userId', (req, res, next) => {
     const { userId } = req.params
