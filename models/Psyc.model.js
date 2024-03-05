@@ -22,6 +22,9 @@ const psycSchema = new Schema(
                 required: true
             }
         },
+        description: {
+            type: String,
+        },
         password: {
             type: String,
             required: [true, 'Password is required.']

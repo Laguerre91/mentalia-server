@@ -3,6 +3,7 @@ const router = express.Router()
 const mongoose = require("mongoose")
 
 const Psyc = require("../models/Psyc.model")
+require("../models/Appointment.model")
 
 router.get('/', (req, res, next) => {
 

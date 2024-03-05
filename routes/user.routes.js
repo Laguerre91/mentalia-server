@@ -3,6 +3,8 @@ const router = express.Router()
 const mongoose = require("mongoose")
 
 const User = require('./../models/User.model')
+require('./../models/Record.model')
+require('./../models/Appointment.model')
 
 
 router.get('/:userId', (req, res, next) => {
