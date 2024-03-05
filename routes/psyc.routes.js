@@ -17,7 +17,7 @@ router.get('/', (req, res, next) => {
 router.get('/:psycId', (req, res, next) => {
     const { psycId } = req.params
 
-    if (!mongoose.Types.ObjectId.isValid(userId)) {
+    if (!mongoose.Types.ObjectId.isValid(psycId)) {
         res.status(400).json({ message: "Specified id is not valid" })
         return
     }
