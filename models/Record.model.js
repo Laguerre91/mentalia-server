@@ -21,7 +21,7 @@ const recordSchema = new Schema(
             type: [String],
             enum: ['Salud', 'Deporte', 'Identidad', 'Espiritualidad', 'Familia', 'Amistades', 'Pareja', 'Soledad', 'Trabajo', 'Educación', 'Dinero', 'Actualidad']
         },
-        didExercize: {
+        didExercise: {
             type: Boolean,
             default: false
         },
