@@ -3,6 +3,7 @@ const router = express.Router()
 const mongoose = require("mongoose")
 
 const Post = require('./../models/Post.model')
+require('./../models/User.model')
 
 // TODO: REVISAR ENDPOINTS APTOS PARA SELECT Y SORT
 
