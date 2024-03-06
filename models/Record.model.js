@@ -25,6 +25,30 @@ const recordSchema = new Schema(
             type: Boolean,
             default: false
         },
+        didHidrate: {
+            type: Boolean,
+            default: false,
+        },
+        ateHealthy: {
+            type: Boolean,
+            default: false
+        },
+        hasPsyc: {
+            type: Boolean,
+            default: false
+        },
+        isMedicated: {
+            type: Boolean,
+            default: false
+        },
+        isMenstruating: {
+            type: Boolean,
+            default: false
+        },
+        hasPeriodPain: {
+            type: Boolean,
+            default: false
+        },
         weather: {
             type: String,
             enum: ['Sol', 'Lluvia', 'Nubes', 'Nieve', 'Tormenta']
