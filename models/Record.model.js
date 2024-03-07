@@ -51,7 +51,7 @@ const recordSchema = new Schema(
         },
         weather: {
             type: String,
-            enum: ['Sol', 'Lluvia', 'Nubes', 'Nieve', 'Tormenta']
+            enum: ['Sol', 'Nubes', 'Lluvia', 'Nieve', 'Tormenta']
         },
         reflection: {
             type: String,
