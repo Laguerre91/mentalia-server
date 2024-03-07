@@ -14,4 +14,7 @@ module.exports = app => {
     const authRouter = require("./auth.routes")
     app.use("/api/auth", authRouter)
 
+    const recordRouter = require("./record.routes")
+    app.use("/api/records", recordRouter)
+
 }
