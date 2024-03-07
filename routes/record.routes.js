@@ -6,7 +6,10 @@ const User = require('./../models/User.model')
 
 router.post('/', (req, res, next) => {
 
-    const { date, mood, rateDay, worries, didExercise, didHidrate, ateHealthy, hasPsyc, isMedicated, isMenstruating, hasPeriodPain, weather, hoursOfSleep, reflection, userId } = req.body
+    const {
+        date,
+        mood,
+        rateDay, worries, didExercise, didHidrate, ateHealthy, hasPsyc, isMedicated, isMenstruating, hasPeriodPain, weather, hoursOfSleep, reflection, userId } = req.body
 
     Record
         .create({ date, mood, rateDay, worries, didExercise, didHidrate, ateHealthy, hasPsyc, isMedicated, isMenstruating, hasPeriodPain, weather, hoursOfSleep, reflection, user: userId })
