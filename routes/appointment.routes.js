@@ -11,7 +11,7 @@ router.post('/', (req, res, next) => {
     const { date, client, comments, psycologist } = req.body
 
     Appointment
-        .create({ date, psycologist, client, comments, psycologist })
+        .create({ date, client, comments, psycologist })
         .then((newAppointment) => {
             return Psycologist.findByIdAndUpdate(psycologist, {
                 $push: { appointments: newAppointment._id }
