@@ -33,7 +33,7 @@ router.put('/:postId', (req, res, next) => {
         .catch(err => next(err))
 })
 
-router.post('/postId', (req, res, next) => {
+router.post('/:postId', (req, res, next) => {
     const { username, comment, image, date, likes } = req.body
 
     Post
@@ -42,7 +42,7 @@ router.post('/postId', (req, res, next) => {
         .catch(err => next(err))
 })
 
-router.delete('/postId', (req, res, next) => {
+router.delete('/:postId', (req, res, next) => {
     const { postId } = req.params
 
     if (!mongoose.Types.ObjectId.isValid(postId)) {

@@ -8,6 +8,9 @@ module.exports = app => {
     const psycRouter = require("./psyc.routes")
     app.use("/api/psic", psycRouter)
 
+    const appointmentRouter = require('./appointment.routes')
+    app.use("/api/appointment", appointmentRouter)
+
     const authRouter = require("./auth.routes")
     app.use("/api/auth", authRouter)
 
