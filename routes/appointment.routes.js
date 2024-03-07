@@ -71,3 +71,5 @@ router.delete('/:appointmentId', (req, res, next) => {
         .catch(err => next(err))
 
 })
+
+module.exports = router
