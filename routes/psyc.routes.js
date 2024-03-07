@@ -3,7 +3,7 @@ const router = express.Router()
 const mongoose = require("mongoose")
 
 const Psyc = require("../models/Psyc.model")
-require("../models/Appointment.model")
+const Appointment = require("../models/Appointment.model")
 
 router.get('/', (req, res, next) => {
 
@@ -31,15 +31,16 @@ router.get('/:psycId', (req, res, next) => {
 })
 
 router.post("/", (req, res, next) => {
-    const { name, lastName, contact, password, birth, profileImage, yearsOfExperience, rate, appointments } = req.body
+    const { name, lastName, contact, password, birth, profileImage, yearsOfExperience, rate } = req.body
 
     Psyc
-        .create({ name, lastName, contact, password, birth, profileImage, yearsOfExperience, rate, appointments: [] })
+        .create({ name, lastName, contact, password, birth, profileImage, yearsOfExperience, rate, appointments: [{}] })
         .then(response => res.json(response))
         .catch(err => next(err))
 })
 
 router.put("/:psycId", (req, res, next) => {
+
     const { psycId } = req.params
     const { name, lastName, contact, password, birth, profileImage, yearsOfExperience, rate, appointments } = req.body
 

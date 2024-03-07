@@ -11,7 +11,7 @@ const appointmentSchema = new Schema(
         },
         psycologist: {
             type: Schema.Types.ObjectId,
-            ref: 'Psic',
+            ref: 'Psyc',
             required: true
         },
         client: {

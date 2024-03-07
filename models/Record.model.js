@@ -53,6 +53,10 @@ const recordSchema = new Schema(
             type: String,
             enum: ['Sol', 'Nubes', 'Lluvia', 'Nieve', 'Tormenta']
         },
+        hoursOfSleep: {
+            type: Number,
+            default: 0
+        },
         reflection: {
             type: String,
         }

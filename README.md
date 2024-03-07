@@ -45,8 +45,5 @@ Base URL /appointment
 
 | **HTTP Method** |   **URI path**  | **Description**            |
 |:---------------:|:---------------:|----------------------------|
-|       GET       | /               | Get all appointments       |
-|       GET       | /:appointmentId | Get a specific appointment |
 |       POST      | /               | Create new appointment     |
-|       PUT       | /:appointmentId | Update created appointment |
-|      DELETE     | /:appointmentId | Delete created appointment |
+
