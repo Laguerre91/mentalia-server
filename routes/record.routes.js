@@ -9,12 +9,12 @@ router.post('/', (req, res, next) => {
     const {
         date,
         mood,
-        rateDay, worries, didExercise, didHidrate, ateHealthy, hasPsyc, isMedicated, isMenstruating, hasPeriodPain, weather, hoursOfSleep, reflection, userId } = req.body
+        rateDay, worries, didExercise, didHidrate, ateHealthy, hasPsyc, isMedicated, isMenstruating, hasPeriodPain, weather, hoursOfSleep, reflection, user } = req.body
 
     Record
-        .create({ date, mood, rateDay, worries, didExercise, didHidrate, ateHealthy, hasPsyc, isMedicated, isMenstruating, hasPeriodPain, weather, hoursOfSleep, reflection, user: userId })
+        .create({ date, mood, rateDay, worries, didExercise, didHidrate, ateHealthy, hasPsyc, isMedicated, isMenstruating, hasPeriodPain, weather, hoursOfSleep, reflection, user })
         .then((newRecord) => {
-            return User.findByIdAndUpdate(userId, {
+            return User.findByIdAndUpdate(user, {
                 $push: { records: newRecord._id }
             })
         })

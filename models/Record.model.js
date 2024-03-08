@@ -1,7 +1,12 @@
-const { Schema, model } = require("mongoose")
+const { Schema, model, SchemaType } = require("mongoose")
 
 const recordSchema = new Schema(
     {
+        user: {
+            type: Schema.Types.ObjectId,
+            ref: 'User',
+            required: true
+        },
         date: {
             type: Date,
             required: true,
@@ -15,7 +20,7 @@ const recordSchema = new Schema(
         rateDay: {
             type: Number,
             required: [true, 'Rating es necesario'],
-            enum: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10']
+            enum: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
         },
         worries: {
             type: [String],
