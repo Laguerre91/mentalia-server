@@ -9,6 +9,10 @@ const appointmentSchema = new Schema(
             default: Date.now,
             required: true
         },
+        time: {
+            type: String,
+            required: true
+        },
         psycologist: {
             type: Schema.Types.ObjectId,
             ref: 'Psyc',

@@ -8,10 +8,10 @@ const Psycologist = require('./../models/Psyc.model')
 
 router.post('/', (req, res, next) => {
 
-    const { date, client, comments, psycologist } = req.body
+    const { date, time, client, comments, psycologist } = req.body
 
     Appointment
-        .create({ date, client, comments, psycologist })
+        .create({ date, time, client, comments, psycologist })
         .then((createdAppointment) => {
             return User.findByIdAndUpdate(client, {
                 $push: { appointments: createdAppointment._id }
@@ -23,6 +23,52 @@ router.post('/', (req, res, next) => {
             })
         })
         .then(response => res.json(response))
+        .catch(err => next(err))
+})
+
+router.get('/', (req, res, next) => {
+
+    Appointment
+        .find()
+        // .populate('psycs')
+        .then(allAppointments => res.json(allAppointments))
+        .catch(err => next(err))
+
+})
+
+router.get('/:appointmentId', (req, res, next) => {
+
+    const { appointmentId } = req.params
+    const { date, psycologist, client, comments } = req.body
+
+    if (!mongoose.Types.ObjectId.isValid(appointmentId)) {
+        res.status(400).json({ message: "Specified id is not valid" })
+        return
+    }
+
+    Appointment
+        .findByIdAndUpdate(
+            appointmentId,
+            { date, psycologist, client, comments },
+            { new: true, runValidators: true }
+        )
+        .populate('psycs')
+        .then(updatedAppointment => res.json(updatedAppointment))
+        .catch(err => next(err))
+
+})
+
+router.delete('/:appointmentId', (req, res, next) => {
+    const { appointmentId } = req.params
+
+    if (!mongoose.Types.ObjectId.isValid(appointmentId)) {
+        res.status(400).json({ message: "Specified id is not valid" })
+        return
+    }
+
+    Appointment
+        .findByIdAndDelete(appointmentId)
+        .then(() => res.json({ message: `Appointment with id ${appointmentId} has been deleted successfully` }))
         .catch(err => next(err))
 })
 
