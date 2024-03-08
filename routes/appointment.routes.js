@@ -12,14 +12,14 @@ router.post('/', (req, res, next) => {
 
     Appointment
         .create({ date, client, comments, psycologist })
-        .then((newAppointment) => {
-            return Psycologist.findByIdAndUpdate(psycologist, {
-                $push: { appointments: newAppointment._id }
+        .then((createdAppointment) => {
+            return User.findByIdAndUpdate(client, {
+                $push: { appointments: createdAppointment._id }
             })
         })
-        .then((newAppointment) => {
-            return User.findByIdAndUpdate(client, {
-                $push: { appointments: newAppointment._id }
+        .then((createdAppointment) => {
+            return Psycologist.findByIdAndUpdate(psycologist, {
+                $push: { appointments: createdAppointment._id }
             })
         })
         .then(response => res.json(response))
