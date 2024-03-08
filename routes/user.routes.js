@@ -17,7 +17,14 @@ router.get('/:userId', (req, res, next) => {
 
     User
         .findById(userId)
-        .populate("appointments records")
+        .populate({
+            path: 'appointments',
+            populate: {
+                path: 'psycologist',
+                model: 'Psyc'
+            }
+        })
+        .populate("records")
         .then((user) => res.json(user))
         .catch(err => next(err))
 })

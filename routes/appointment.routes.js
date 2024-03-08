@@ -30,7 +30,7 @@ router.get('/', (req, res, next) => {
 
     Appointment
         .find()
-        // .populate('psycs')
+        .populate('psycologist client')
         .then(allAppointments => res.json(allAppointments))
         .catch(err => next(err))
 
@@ -39,7 +39,6 @@ router.get('/', (req, res, next) => {
 router.get('/:appointmentId', (req, res, next) => {
 
     const { appointmentId } = req.params
-    const { date, psycologist, client, comments } = req.body
 
     if (!mongoose.Types.ObjectId.isValid(appointmentId)) {
         res.status(400).json({ message: "Specified id is not valid" })
@@ -47,12 +46,9 @@ router.get('/:appointmentId', (req, res, next) => {
     }
 
     Appointment
-        .findByIdAndUpdate(
-            appointmentId,
-            { date, psycologist, client, comments },
-            { new: true, runValidators: true }
-        )
-        .populate('psycs')
+        .findById(appointmentId)
+        .populate('psycologist')
+        .populate('client')
         .then(updatedAppointment => res.json(updatedAppointment))
         .catch(err => next(err))
 
