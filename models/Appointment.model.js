@@ -5,8 +5,8 @@ const appointmentSchema = new Schema(
 
     {
         date: {
-            type: Date,
-            default: Date.now,
+            type: String,
+            default: new Date().toISOString(),
             required: true
         },
         time: {
