@@ -17,6 +17,9 @@ const userSchema = new Schema(
       type: String,
       required: [true, 'Username es necesario.'],
     },
+    image: {
+      type: String
+    },
     birth: {
       type: Date,
     },

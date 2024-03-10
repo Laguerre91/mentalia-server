@@ -11,6 +11,9 @@ module.exports = app => {
     const appointmentsRouter = require('./appointment.routes')
     app.use("/api/appointments", appointmentsRouter)
 
+    const uploadRouter = require("./upload.routes")
+    app.use("/api/upload", uploadRouter)
+
     const authRouter = require("./auth.routes")
     app.use("/api/auth", authRouter)
 
