@@ -11,16 +11,9 @@ const postSchema = new Schema(
             required: true,
             default: ''
         },
-        image: {
-            type: String
-        },
         date: {
-            type: Date,
-            default: Date.now
-        },
-        likes: {
-            type: Number,
-            default: 0
+            type: String,
+            default: new Date().toISOString()
         },
         replies: [
             {

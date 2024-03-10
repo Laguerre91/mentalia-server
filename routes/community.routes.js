@@ -3,16 +3,12 @@ const router = express.Router()
 const mongoose = require("mongoose")
 
 const Post = require('./../models/Post.model')
-require('./../models/User.model')
-
-// TODO: REVISAR ENDPOINTS APTOS PARA SELECT Y SORT
+const User = require('./../models/User.model')
 
 router.get('/', (req, res, next) => {
 
     Post
         .find()
-        // .select()
-        // .sort()
         .populate('user')
         .then(allPosts => res.json(allPosts))
         .catch(err => next(err))
@@ -33,11 +29,16 @@ router.put('/:postId', (req, res, next) => {
         .catch(err => next(err))
 })
 
-router.post('/:postId', (req, res, next) => {
-    const { username, comment, image, date, likes } = req.body
+router.post('/', (req, res, next) => {
+    const { username, comment, date } = req.body
 
     Post
-        .create({ username, comment, image, date, likes, replies: [] })
+        .create({ username, comment, date, replies: [] })
+        .then((createdPost) => {
+            return User.findByIdAndUpdate(username, {
+                $push: { posts: createdPost._id }
+            })
+        })
         .then(response => res.json(response))
         .catch(err => next(err))
 })

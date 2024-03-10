@@ -64,8 +64,18 @@ router.delete('/:appointmentId', (req, res, next) => {
 
     Appointment
         .findByIdAndDelete(appointmentId)
+        .then(appointment => {
+            deletedAppointment = appointment;
+            return Promise.all([
+                User
+                    .findByIdAndUpdate(deletedAppointment.client, { $pull: { appointments: deletedAppointment._id } }),
+                Psycologist
+                    .findByIdAndUpdate(deletedAppointment.psycologist, { $pull: { appointments: deletedAppointment._id } })
+            ]);
+        })
         .then(() => res.json({ message: `Appointment with id ${appointmentId} has been deleted successfully` }))
-        .catch(err => next(err))
+        .catch(err => next(err));
 })
+
 
 module.exports = router

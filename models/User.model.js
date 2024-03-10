@@ -46,6 +46,10 @@ const userSchema = new Schema(
     appointments: [{
       type: Schema.Types.ObjectId,
       ref: 'Appointment'
+    }],
+    posts: [{
+      type: Schema.Types.ObjectId,
+      ref: 'Post'
     }]
   },
   {

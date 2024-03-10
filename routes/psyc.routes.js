@@ -34,7 +34,7 @@ router.post("/", (req, res, next) => {
     const { name, lastName, contact, password, birth, profileImage, yearsOfExperience, rate } = req.body
 
     Psyc
-        .create({ name, lastName, contact, password, birth, profileImage, yearsOfExperience, rate, appointments: [{}] })
+        .create({ name, lastName, contact, password, birth, profileImage, yearsOfExperience, rate, appointments: [] })
         .then(response => res.json(response))
         .catch(err => next(err))
 })
