@@ -53,6 +53,59 @@ router.post('/', (req, res, next) => {
         .catch(err => next(err))
 })
 
+router.put('/:recordId', (req, res, next) => {
+    const { recordId } = req.params
+
+    const {
+        date,
+        mood,
+        rateDay,
+        worries,
+        didExercise,
+        didHidrate,
+        ateHealthy,
+        hasPsyc,
+        isMedicated,
+        isMenstruating,
+        hasPeriodPain,
+        weather,
+        hoursOfSleep,
+        reflection,
+        user
+    } = req.body
+
+    if (!mongoose.Types.ObjectId.isValid(recordId)) {
+        res.status(400).json({ message: "Specified id is not valid" })
+        return
+    }
+
+    Record
+        .findByIdAndUpdate(
+            recordId,
+            {
+                date,
+                mood,
+                rateDay,
+                worries,
+                didExercise,
+                didHidrate,
+                ateHealthy,
+                hasPsyc,
+                isMedicated,
+                isMenstruating,
+                hasPeriodPain,
+                weather,
+                hoursOfSleep,
+                reflection,
+                user
+            },
+
+            { new: true, runValidators: true })
+        .then(updatedRecord => res.json(updatedRecord))
+        .catch(err => next(err))
+
+})
+
 router.delete('/:recordId', (req, res, next) => {
     const { recordId } = req.params
 
