@@ -8,9 +8,9 @@ const recordSchema = new Schema(
             required: true
         },
         date: {
-            type: Date,
-            required: true,
-            default: Date.now
+            type: String,
+            default: new Date().toISOString(),
+            required: true
         },
         mood: {
             type: String,
