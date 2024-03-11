@@ -31,6 +31,7 @@ router.post('/posts', (req, res, next) => {
         .catch(error => next(error));
 });
 
+
 router.post('/posts/:postId/replies', (req, res, next) => {
     const { postId: post } = req.params;
     const { reply, username, date } = req.body
