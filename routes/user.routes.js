@@ -25,6 +25,13 @@ router.get('/:userId', (req, res, next) => {
             }
         })
         .populate("records")
+        .populate({
+            path: 'posts',
+            populate: {
+                path: 'username',
+                model: 'Post'
+            }
+        })
         .then((user) => res.json(user))
         .catch(err => next(err))
 })

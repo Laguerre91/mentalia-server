@@ -1,61 +1,62 @@
-const express = require("express")
-const router = express.Router()
-const mongoose = require("mongoose")
+const express = require("express");
+const router = express.Router();
+const mongoose = require("mongoose");
+const Post = require('./../models/Post.model');
+const User = require('./../models/User.model');
+const Reply = require('./../models/Reply.model')
 
-const Post = require('./../models/Post.model')
-const User = require('./../models/User.model')
-
-router.get('/', (req, res, next) => {
-
-    Post
-        .find()
-        .populate('user')
+router.get('/posts', (req, res, next) => {
+    Post.find()
+        .populate('username')
+        .populate({
+            path: 'replies',
+            populate: {
+                path: 'username'
+            },
+        })
         .then(allPosts => res.json(allPosts))
-        .catch(err => next(err))
-})
+        .catch(error => next(error));
+});
 
-router.put('/:postId', (req, res, next) => {
+router.post('/posts', (req, res, next) => {
+    const { username, comment, date } = req.body;
 
-    const { postId } = req.params
-
-    if (!mongoose.Types.ObjectId.isValid(postId)) {
-        res.status(400).json({ message: "Specified id is not valid" })
-        return
-    }
-
-    Post
-        .findByIdAndUpdate(postId, req.body, { new: true })
-        .then((updatedPost) => res.json(updatedPost))
-        .catch(err => next(err))
-})
-
-router.post('/', (req, res, next) => {
-    const { username, comment, date } = req.body
-
-    Post
-        .create({ username, comment, date, replies: [] })
-        .then((createdPost) => {
+    Post.create({ username, comment, date })
+        .then(createdPost => {
             return User.findByIdAndUpdate(username, {
                 $push: { posts: createdPost._id }
-            })
+            });
         })
         .then(response => res.json(response))
+        .catch(error => next(error));
+});
+
+router.post('/posts/:postId/replies', (req, res, next) => {
+    const { postId: post } = req.params;
+    const { reply, username, date } = req.body
+
+    Reply
+        .create({ reply, username, date, post })
+        .then(createdReply => {
+            Post.findByIdAndUpdate(post, {
+                $push: { replies: createdReply._id }
+            }).then().catch(err => next(err));
+            return createdReply;
+        })
+        .then(createdReply => {
+            console.log(`Enviando respuesta al usuario: ${createdReply}`)
+            res.json(createdReply)
+        })
         .catch(err => next(err))
 })
 
-router.delete('/:postId', (req, res, next) => {
-    const { postId } = req.params
 
-    if (!mongoose.Types.ObjectId.isValid(postId)) {
-        res.status(400).json({ message: "Specified id is not valid" })
-        return
-    }
+router.delete('/posts/:postId', (req, res, next) => {
+    const { postId } = req.params;
 
-    Post
-        .findByIdAndDelete(postId)
+    Post.findByIdAndDelete(postId)
         .then(() => res.json({ message: `Post with id ${postId} has been deleted successfully` }))
-        .catch(err => next(err))
+        .catch(error => next(error));
+});
 
-})
-
-module.exports = router
+module.exports = router;

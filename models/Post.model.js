@@ -15,22 +15,13 @@ const postSchema = new Schema(
             type: String,
             default: new Date().toISOString()
         },
-        replies: [
-            {
-                username: {
-                    type: Schema.Types.ObjectId,
-                    ref: 'User'
-                },
-                comment: {
-                    type: String,
-                    required: true
-                },
-                date: {
-                    type: Date,
-                    default: Date.now
-                }
-            }
-        ],
+        replies: {
+            type: [{
+                type: Schema.Types.ObjectId,
+                ref: 'Reply'
+            }],
+            default: []
+        },
     },
     {
         timestamps: true
