@@ -53,6 +53,31 @@ router.post('/', (req, res, next) => {
         .catch(err => next(err))
 })
 
+router.get('/', (req, res, next) => {
+
+    Record
+        .find()
+        .then(allRecords => res.json(allRecords))
+        .catch(err => next(err))
+
+})
+
+router.get('/:recordId', (req, res, next) => {
+
+    const { recordId } = req.params
+
+    if (!mongoose.Types.ObjectId.isValid(recordId)) {
+        res.status(400).json({ message: "Specified id is not valid" })
+        return
+    }
+
+    Record
+        .findById(recordId)
+        .then(updatedRecord => res.json(updatedRecord))
+        .catch(err => next(err))
+
+})
+
 router.put('/:recordId', (req, res, next) => {
     const { recordId } = req.params
 
