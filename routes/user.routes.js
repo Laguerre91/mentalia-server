@@ -28,7 +28,7 @@ router.get('/:userId', (req, res, next) => {
         .populate({
             path: 'posts',
             populate: {
-                path: 'username',
+                path: 'owner',
                 model: 'Post'
             }
         })
