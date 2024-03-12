@@ -5,11 +5,13 @@ const replySchema = new Schema(
     {
         post: {
             type: Schema.Types.ObjectId,
-            ref: 'Post'
+            ref: 'Post',
+            required: true,
         },
-        username: {
+        owner: {
             type: Schema.Types.ObjectId,
-            ref: 'User'
+            ref: 'User',
+            required: true,
         },
         reply: {
             type: String,

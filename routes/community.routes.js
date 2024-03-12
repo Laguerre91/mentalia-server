@@ -6,24 +6,20 @@ const User = require('./../models/User.model');
 const Reply = require('./../models/Reply.model')
 
 router.get('/posts', (req, res, next) => {
-    Post.find()
-        .populate('username')
-        .populate({
-            path: 'replies',
-            populate: {
-                path: 'username'
-            },
-        })
+    Post
+        .find()
+        .populate('owner replies')
         .then(allPosts => res.json(allPosts))
         .catch(error => next(error));
 });
 
 router.post('/posts', (req, res, next) => {
-    const { username, comment, date } = req.body;
 
-    Post.create({ username, comment, date })
+    const { owner, comment, date } = req.body;
+
+    Post.create({ owner, comment, date })
         .then(createdPost => {
-            return User.findByIdAndUpdate(username, {
+            return User.findByIdAndUpdate(owner, {
                 $push: { posts: createdPost._id }
             });
         })
@@ -32,22 +28,32 @@ router.post('/posts', (req, res, next) => {
 });
 
 
-router.post('/posts/:postId/replies', (req, res, next) => {
-    const { postId: post } = req.params;
-    const { reply, username, date } = req.body
+router.get('/posts/:postId/replies', (req, res, next) => {
+
+    const { postId } = req.params;
 
     Reply
-        .create({ reply, username, date, post })
+        .find({ post: postId })
+        .populate('owner')
+        .then(allReplies => res.json(allReplies))
+        .catch(error => next(error));
+})
+
+router.post('/posts/:postId/replies', (req, res, next) => {
+
+    const { postId: post } = req.params;
+    const { reply, owner, date } = req.body
+
+    Reply
+        .create({ reply, owner, date, post })
         .then(createdReply => {
-            Post.findByIdAndUpdate(post, {
-                $push: { replies: createdReply._id }
-            }).then().catch(err => next(err));
-            return createdReply;
+            return Post.findByIdAndUpdate(
+                post,
+                { $push: { replies: createdReply._id } },
+                { new: true }
+            )
         })
-        .then(createdReply => {
-            console.log(`Enviando respuesta al usuario: ${createdReply}`)
-            res.json(createdReply)
-        })
+        .then(updatedPost => res.json(updatedPost))
         .catch(err => next(err))
 })
 
