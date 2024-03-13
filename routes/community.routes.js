@@ -66,4 +66,14 @@ router.delete('/posts/:postId', (req, res, next) => {
         .catch(error => next(error));
 });
 
+router.delete('/replies/:replyId', (req, res, next) => {
+    const { replyId } = req.params
+
+    Reply
+        .findByIdAndDelete(replyId)
+        .then(() => res.json({ message: `Reply with id ${replyId} has been deleted successfully` }))
+        .catch(error => next(error));
+
+})
+
 module.exports = router;
