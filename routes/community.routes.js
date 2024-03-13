@@ -20,7 +20,7 @@ router.post('/posts', (req, res, next) => {
     Post.create({ owner, comment, date })
         .then(createdPost => {
             return User.findByIdAndUpdate(owner, {
-                $push: { posts: createdPost._id }
+                $unshift: { posts: createdPost._id }
             });
         })
         .then(response => res.json(response))
